@@ -1,0 +1,29 @@
+databases:
+  - name: daily-site-tracker-db
+    plan: free
+    databaseName: site_tracker
+    user: dst_admin
+
+services:
+  - type: web
+    name: daily-site-tracker-api
+    plan: free
+    runtime: python
+    rootDir: backend
+    buildCommand: chmod +x build.sh && ./build.sh
+    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: daily-site-tracker-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "0"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false  # Set this manually after deploying frontend
+      - key: PYTHON_VERSION
+        value: "3.11.9"
