@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import api from '../../api/client'
-import { Package, Upload, Check, Loader2, Camera, X, Plus } from 'lucide-react'
+import { Package, Upload, Check, Loader2, Camera, X, Plus, Image as ImageIcon } from 'lucide-react'
 import { useToast } from '../../contexts/ToastContext'
 
 const ALL_CATEGORIES = ['ปูน', 'เหล็ก', 'ไม้', 'สี', 'ทราย', 'หิน', 'ท่อ', 'สายไฟ', 'กระเบื้อง', 'อื่นๆ']
@@ -169,11 +169,18 @@ export default function AddMaterialLog() {
             </div>
           )}
           {previews.length === 0 && (
-            <label className="flex items-center justify-center h-20 border-2 border-dashed border-surface-300 dark:border-surface-600 rounded-2xl cursor-pointer hover:border-primary-500 transition-colors gap-2">
-              <Camera className="w-5 h-5 text-surface-400" />
-              <span className="text-sm text-surface-500">ถ่ายรูปใบเสร็จ (หลายรูปได้)</span>
-              <input type="file" accept="image/*" capture="environment" multiple onChange={handleImageChange} className="hidden" />
-            </label>
+            <div className="grid grid-cols-2 gap-3">
+              <label className="flex items-center justify-center h-16 border-2 border-dashed border-surface-300 dark:border-surface-600 rounded-2xl cursor-pointer hover:border-primary-500 transition-colors gap-2">
+                <Camera className="w-5 h-5 text-surface-400" />
+                <span className="text-sm text-surface-500">ถ่ายรูป</span>
+                <input type="file" accept="image/*" capture="environment" onChange={handleImageChange} className="hidden" />
+              </label>
+              <label className="flex items-center justify-center h-16 border-2 border-dashed border-surface-300 dark:border-surface-600 rounded-2xl cursor-pointer hover:border-primary-500 transition-colors gap-2">
+                <ImageIcon className="w-5 h-5 text-surface-400" />
+                <span className="text-sm text-surface-500">เลือกรูป</span>
+                <input type="file" accept="image/*" multiple onChange={handleImageChange} className="hidden" />
+              </label>
+            </div>
           )}
         </div>
 

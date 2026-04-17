@@ -57,12 +57,14 @@ export default function AddLaborLog() {
       const histLogs = histRes.data.results || histRes.data || []
       const projectWorkerIds = new Set(histLogs.map(l => l.worker))
 
-      // Show only project workers; fall back to all workers for new projects
-      const filteredWorkers = projectWorkerIds.size > 0
-        ? allWorkers.filter(w => projectWorkerIds.has(w.id))
-        : allWorkers
+      // Show all workers, but sort project-history workers first
+      const sortedWorkers = [...allWorkers].sort((a, b) => {
+        const aInProject = projectWorkerIds.has(a.id) ? 0 : 1
+        const bInProject = projectWorkerIds.has(b.id) ? 0 : 1
+        return aInProject - bInProject || a.name.localeCompare(b.name, 'th')
+      })
 
-      setWorkers(filteredWorkers)
+      setWorkers(sortedWorkers)
       setSelectedWorkers([])
 
       // Pre-mark workers who already have logs today

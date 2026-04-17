@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import api from '../api/client'
 import {
   X, Camera, Plus, Upload, Loader2, Check,
-  AlertTriangle, TrendingUp, Users, Wrench
+  AlertTriangle, TrendingUp, Users, Wrench, Image as ImageIcon
 } from 'lucide-react'
 
 export default function ProgressUpdateModal({ isOpen, onClose, project, onSuccess }) {
@@ -314,11 +314,18 @@ export default function ProgressUpdateModal({ isOpen, onClose, project, onSucces
               </div>
             )}
             {previews.length === 0 && (
-              <label className="flex flex-col items-center justify-center h-28 border-2 border-dashed border-surface-300 dark:border-surface-600 rounded-2xl cursor-pointer hover:border-primary-500 transition-colors">
-                <Camera className="w-8 h-8 text-surface-400 mb-1" />
-                <span className="text-sm text-surface-500">แตะเพื่อเลือกรูป</span>
-                <input type="file" accept="image/*" capture="environment" multiple onChange={handleImageChange} className="hidden" />
-              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <label className="flex flex-col items-center justify-center h-24 border-2 border-dashed border-surface-300 dark:border-surface-600 rounded-2xl cursor-pointer hover:border-primary-500 transition-colors">
+                  <Camera className="w-7 h-7 text-surface-400 mb-1" />
+                  <span className="text-xs text-surface-500">ถ่ายรูป</span>
+                  <input type="file" accept="image/*" capture="environment" onChange={handleImageChange} className="hidden" />
+                </label>
+                <label className="flex flex-col items-center justify-center h-24 border-2 border-dashed border-surface-300 dark:border-surface-600 rounded-2xl cursor-pointer hover:border-primary-500 transition-colors">
+                  <ImageIcon className="w-7 h-7 text-surface-400 mb-1" />
+                  <span className="text-xs text-surface-500">เลือกจากแกลเลอรี</span>
+                  <input type="file" accept="image/*" multiple onChange={handleImageChange} className="hidden" />
+                </label>
+              </div>
             )}
           </div>
 
