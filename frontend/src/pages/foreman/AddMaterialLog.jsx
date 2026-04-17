@@ -162,8 +162,13 @@ export default function AddMaterialLog() {
                 </div>
               ))}
               <label className="flex flex-col items-center justify-center aspect-square border-2 border-dashed border-surface-300 dark:border-surface-600 rounded-xl cursor-pointer hover:border-primary-500 transition-colors">
-                <Plus className="w-6 h-6 text-surface-400" />
-                <span className="text-[10px] text-surface-500">เพิ่มรูป</span>
+                <Camera className="w-5 h-5 text-surface-400" />
+                <span className="text-[10px] text-surface-500">ถ่ายเพิ่ม</span>
+                <input type="file" accept="image/*" capture="environment" onChange={handleImageChange} className="hidden" />
+              </label>
+              <label className="flex flex-col items-center justify-center aspect-square border-2 border-dashed border-surface-300 dark:border-surface-600 rounded-xl cursor-pointer hover:border-primary-500 transition-colors">
+                <Plus className="w-5 h-5 text-surface-400" />
+                <span className="text-[10px] text-surface-500">เลือกรูป</span>
                 <input type="file" accept="image/*" multiple onChange={handleImageChange} className="hidden" />
               </label>
             </div>
